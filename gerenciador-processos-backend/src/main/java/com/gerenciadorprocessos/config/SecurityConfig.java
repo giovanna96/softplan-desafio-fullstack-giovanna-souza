@@ -10,6 +10,12 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * @author Giovanna Severo
@@ -27,20 +33,43 @@ public class SecurityConfig {
 
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        return http
-                .csrf(crsf-> crsf.ignoringAntMatchers("/h2-console/**"))
-                .authorizeRequests(authorize -> authorize
-                        .antMatchers("/h2-console/**").permitAll()
-                        .mvcMatchers("/").permitAll()
-                        .anyRequest().authenticated())
-                .userDetailsService(jpaUserDetailService)
-                .headers(headers->headers.frameOptions().sameOrigin())
-                .formLogin(Customizer.withDefaults())
-                .build();
+        http.csrf().disable().cors().configurationSource(corsConfigurationSource()).and()
+                .authorizeRequests()
+                .antMatchers("/h2-console/**").permitAll()
+                .mvcMatchers("/").permitAll()
+                .anyRequest().authenticated().and().httpBasic();
+
+        return http.build();
     }
 
     @Bean
     public PasswordEncoder getPasswordEncoder() {
         return new BCryptPasswordEncoder();
+    }
+
+    @Bean
+    CorsConfigurationSource corsConfigurationSource() {
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        CorsConfiguration config = new CorsConfiguration();
+        config.setAllowCredentials(true);
+        config.applyPermitDefaultValues();
+        config.addAllowedOrigin("*");
+        config.addAllowedHeader("Content-Type");
+        config.addAllowedHeader("x-xsrf-token");
+        config.addAllowedHeader("Authorization");
+        config.addAllowedHeader("Access-Control-Allow-Headers");
+        config.addAllowedHeader("Origin");
+        config.addAllowedHeader("Accept");
+        config.addAllowedHeader("X-Requested-With");
+        config.addAllowedHeader("Access-Control-Request-Method");
+        config.addAllowedHeader("Access-Control-Request-Headers");
+        config.addAllowedMethod("OPTIONS");
+        config.addAllowedMethod("GET");
+        config.addAllowedMethod("PUT");
+        config.addAllowedMethod("PATCH");
+        config.addAllowedMethod("POST");
+        config.addAllowedMethod("DELETE");
+        source.registerCorsConfiguration("/**", config);
+        return source;
     }
 }

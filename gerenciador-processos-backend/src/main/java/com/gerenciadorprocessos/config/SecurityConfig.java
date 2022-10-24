@@ -34,10 +34,13 @@ public class SecurityConfig {
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf().disable().cors().configurationSource(corsConfigurationSource()).and()
-                .authorizeRequests()
-                .antMatchers("/h2-console/**").permitAll()
-                .mvcMatchers("/").permitAll()
-                .anyRequest().authenticated().and().httpBasic();
+                .authorizeRequests(authorize -> authorize
+                        .antMatchers("/h2-console/**").permitAll()
+                        .mvcMatchers("/").permitAll()
+                        .anyRequest().authenticated())
+                .userDetailsService(jpaUserDetailService)
+                .headers(headers->headers.frameOptions().sameOrigin())
+                .httpBasic();
 
         return http.build();
     }

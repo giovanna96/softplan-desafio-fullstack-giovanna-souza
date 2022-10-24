@@ -29,7 +29,4 @@ public class Processo {
 
     private String infoProcesso;
 
-//    @OneToMany
-//    private List<Parecer> parecerList;
-
 }

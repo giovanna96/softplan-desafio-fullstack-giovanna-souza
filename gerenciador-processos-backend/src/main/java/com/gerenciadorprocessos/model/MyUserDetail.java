@@ -22,7 +22,7 @@ public class MyUserDetail implements UserDetails {
     private List<GrantedAuthority> authorities;
 
     public MyUserDetail(Usuario user) {
-        this.userName = user.getEmail();
+        this.userName = user.getLogin();
         this.password = user.getSenha();
         this.active = user.isUsuarioAtivo();
         this.authorities = Arrays.stream(user.getPapeis().split(","))

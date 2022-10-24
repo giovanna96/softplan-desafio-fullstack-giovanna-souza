@@ -13,6 +13,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * @author Giovanna Severo
+ * @since 22/10/2022
+ */
 @RestController
 @RequestMapping(value = "/parecer")
 public class ParecerController {
@@ -25,7 +29,18 @@ public class ParecerController {
     }
 
     @PostMapping("/atribuir")
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ROLE_TRIADOR')")
+    public ResponseEntity atribuirParecer(@RequestBody ParecerDTO parecerDTO){
+        try {
+            parecerService.atribuirParecer(parecerDTO);
+            return ResponseEntity.status(HttpStatus.CREATED).build();
+        }catch (RegraNegocioException e){
+            return ResponseEntity.badRequest().build();
+        }
+    }
+
+    @PostMapping("/salvar")
+    @PreAuthorize("hasRole('ROLE_FINALIZADOR')")
     public ResponseEntity salvar(@RequestBody ParecerDTO parecerDTO){
         try {
             parecerService.atribuirParecer(parecerDTO);

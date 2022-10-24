@@ -33,7 +33,7 @@ public class ProcessoController {
     }
 
     @GetMapping("/listar")
-    @PreAuthorize("hasAnyRole('ROLE_TRIADOR','ROLE_FINALIZADOR')")
+    @PreAuthorize("hasRole('ROLE_TRIADOR')")
     public ResponseEntity listarProcessos(){
         List<ProcessoRespostaDTO> listaProcessos = processoService.listarProcessos();
         if(!listaProcessos.isEmpty()){
@@ -56,7 +56,7 @@ public class ProcessoController {
     }
 
     @PostMapping("/salvar")
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ROLE_TRIADOR')")
     public ResponseEntity salvar(@RequestBody ProcessoDTO processoDTO){
         try {
             processoService.salvar(processoDTO);

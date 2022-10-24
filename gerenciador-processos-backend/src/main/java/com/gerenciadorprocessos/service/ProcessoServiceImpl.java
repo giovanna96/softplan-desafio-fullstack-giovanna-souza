@@ -14,6 +14,10 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author Giovanna Severo
+ * @since 22/10/2022
+ */
 @Service
 public class ProcessoServiceImpl implements ProcessoService{
 

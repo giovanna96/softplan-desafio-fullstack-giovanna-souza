@@ -7,6 +7,10 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
+/**
+ * @author Giovanna Severo
+ * @since 22/10/2022
+ */
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
@@ -15,7 +19,7 @@ import javax.persistence.*;
 @Table(schema = "public",name = "parecer")
 public class Parecer {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
 
     private Long id;
 

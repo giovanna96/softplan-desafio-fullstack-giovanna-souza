@@ -6,6 +6,10 @@ import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 
+/**
+ * @author Giovanna Severo
+ * @since 22/10/2022
+ */
 public interface ProcessoRepository extends JpaRepository<Processo,Long> {
     @Query(value = "SELECT p.processo FROM Parecer p INNER JOIN p.processo WHERE p.parecerExecutado = false and p.usuarioResponsavel.login = :login " )
     List<Processo> findAllSemParecer(String login);

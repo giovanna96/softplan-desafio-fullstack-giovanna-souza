@@ -6,7 +6,10 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
+/**
+ * @author Giovanna Severo
+ * @since 22/10/2022
+ */
 
 @AllArgsConstructor
 @NoArgsConstructor

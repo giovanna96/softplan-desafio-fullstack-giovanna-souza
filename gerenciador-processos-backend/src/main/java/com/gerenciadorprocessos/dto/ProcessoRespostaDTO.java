@@ -6,6 +6,11 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * @author Giovanna Severo
+ * @since 22/10/2022
+ */
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

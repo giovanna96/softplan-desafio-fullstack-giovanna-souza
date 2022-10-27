@@ -16,6 +16,7 @@ export const logar = (dadosUsuario) => (dispatch) => {
         typeof response != undefined &&
         dispatch(
           usuarioLogou({
+            id: response.data.id,
             login: dadosUsuario.login,
             senha: dadosUsuario.senha,
             roles: response.data.papeis,

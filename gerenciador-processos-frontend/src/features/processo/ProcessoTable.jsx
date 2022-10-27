@@ -14,12 +14,30 @@ import Grid from '@mui/material/Unstable_Grid2';
 import { changeProcesso } from '../../redux/actions/proocesso.action';
 import FileOpenIcon from '@mui/icons-material/FileOpen';
 import PostAddIcon from '@mui/icons-material/PostAdd';
+import AddCircleIcon from '@mui/icons-material/AddCircle';
 import { change } from '../../redux/actions/parecer.action';
 import { useSelector } from 'react-redux';
 
 const ProcessoTable = (props) => {
   const { processo, dispatch, auth } = props;
   const parecer = useSelector((state) => state.parecerReducer);
+  const handleAddResponsaveis = (item) => {
+    dispatch(
+      change({
+        item: {
+          ...parecer.item,
+          idProcesso: item.id,
+        },
+      }),
+    );
+    dispatch(
+      changeProcesso({
+        item: item,
+        page: 2,
+        isResponsaveis: true,
+      }),
+    );
+  };
   const handleAddParecer = (item) => {
     dispatch(
       change({
@@ -63,6 +81,8 @@ const ProcessoTable = (props) => {
                   <TableCell>n.º Processo</TableCell>
                   <TableCell>Descrição</TableCell>
                   <TableCell></TableCell>
+                  <TableCell></TableCell>
+                  {!processo.isParecer ? <TableCell></TableCell> : ''}
                   {processo.isParecer ? <TableCell></TableCell> : ''}
                 </TableRow>
               </TableHead>
@@ -88,6 +108,17 @@ const ProcessoTable = (props) => {
                           <FileOpenIcon />
                         </IconButton>
                       </TableCell>
+                      {!processo.isParecer ? (
+                        <TableCell>
+                          <IconButton
+                            onClick={() => handleAddResponsaveis(item)}
+                          >
+                            <AddCircleIcon />
+                          </IconButton>
+                        </TableCell>
+                      ) : (
+                        ''
+                      )}
                       {processo.isParecer ? (
                         <TableCell>
                           <IconButton onClick={() => handleAddParecer(item)}>

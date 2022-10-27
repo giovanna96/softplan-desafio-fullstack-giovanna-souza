@@ -12,6 +12,7 @@ const initialState = {
   page: 1,
   isVisualizar: false,
   isParecer: false,
+  isResponsaveis: false,
 };
 
 export default (state = initialState, { type, payload }) => {

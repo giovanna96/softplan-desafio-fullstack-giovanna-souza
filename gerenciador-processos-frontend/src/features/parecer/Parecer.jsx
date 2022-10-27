@@ -6,6 +6,7 @@ import { useEffect } from 'react';
 import { changeProcesso } from '../../redux/actions/proocesso.action';
 import NewParecer from './NewParecer';
 import NewProcesso from '../processo/NewProcesso';
+import { Grid } from '@mui/material';
 
 const Processo = () => {
   const processo = useSelector((state) => state.processoReducer);
@@ -18,7 +19,9 @@ const Processo = () => {
   return (
     <>
       <NavBar />
-
+      <Grid item xs={12}>
+        {JSON.stringify(auth)}
+      </Grid>
       {processo.page === 1 ? (
         <ProcessoSearch processo={processo} dispatch={dispatch} auth={auth} />
       ) : parecer.isCadastro ? (

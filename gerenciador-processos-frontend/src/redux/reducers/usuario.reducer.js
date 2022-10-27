@@ -11,12 +11,7 @@ const initialState = {
     ativo: false,
     papeis: '',
   },
-  erro: {
-    erroNome: false,
-    erroEmail: false,
-    erroLogin: false,
-    erroSenha: false,
-  },
+  erro: '',
   msgErro: '',
   page: 1,
   isEditar: false,

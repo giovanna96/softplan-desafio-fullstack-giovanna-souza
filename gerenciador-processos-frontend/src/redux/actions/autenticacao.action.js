@@ -13,7 +13,7 @@ export const logar = (dadosUsuario) => (dispatch) => {
   })
     .then(
       (response) =>
-        typeof response != undefined &&
+        typeof response !== 'undefined' &&
         dispatch(
           usuarioLogou({
             id: response.data.id,

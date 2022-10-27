@@ -6,6 +6,7 @@ import {
 import Login from './login/Login';
 import Menu from './menu/Menu';
 import Usuario from '../features/usuario/Usuario';
+import Processo from '../features/processo/Processo';
 
 function Routes() {
   return (
@@ -14,6 +15,7 @@ function Routes() {
         <Route exact path="/login" element={<Login />} />
         <Route exact path="/menu" element={<Menu />} />
         <Route exact path="/usuario" element={<Usuario />} />
+        <Route exact path="/processo" element={<Processo />} />
       </Switch>
     </Router>
   );

@@ -14,7 +14,7 @@ export const searchUsuarios = (auth) => (dispatch) => {
   return Http.get('/usuario/listar', {
     auth: { username: auth.login, password: auth.senha },
   }).then((response) => {
-    if (typeof response != undefined && response.status === 200) {
+    if (typeof response !== 'undefined' && response.status === 200) {
       dispatch(change({ itens: response.data }));
     }
   });
@@ -25,11 +25,12 @@ export const addUsuario =
   (dispatch) => {
     return Http.post('/usuario/salvar', usuario, {
       auth: { username: auth.login, password: auth.senha },
-    }).then((response) => {
-      if (typeof response != undefined && response.status === 201) {
-        dispatch(change({ limparDados: true, page: 1 }));
-      }
-    });
+    }).then(
+      (response) =>
+        typeof response !== 'undefined' &&
+        response.status === 201 &&
+        dispatch(change({ limparDados: true, page: 1 })),
+    );
   };
 
 export const editUsuario =
@@ -38,7 +39,7 @@ export const editUsuario =
     return Http.put('/usuario/atualizar?id=' + usuario.id, usuario, {
       auth: { username: auth.login, password: auth.senha },
     }).then((response) => {
-      if (typeof response != undefined && response.status === 201) {
+      if (typeof response !== 'undefined' && response.status === 200) {
         dispatch(change({ limparDados: true, page: 1 }));
       }
     });
@@ -50,7 +51,7 @@ export const deleteUsuario =
     return Http.delete('/usuario/excluir?id=' + id, {
       auth: { username: auth.login, password: auth.senha },
     }).then((response) => {
-      if (typeof response != undefined && response.status === 200) {
+      if (typeof response !== 'undefined' && response.status === 200) {
         dispatch(searchUsuarios(auth));
       }
     });

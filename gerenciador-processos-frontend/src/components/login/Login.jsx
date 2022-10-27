@@ -82,9 +82,6 @@ const Login = () => {
                 </Button>
               </CardActions>
             </Grid>
-            <Grid item xs={12}>
-              {JSON.stringify(auth)}
-            </Grid>
           </Card>
         </Grid>
       </Grid>

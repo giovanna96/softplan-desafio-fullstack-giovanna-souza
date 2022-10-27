@@ -28,8 +28,8 @@ const Menu = () => {
           </Typography>
           <Divider />
         </Grid>
-        <Grid item xs={12}>
-          {papeis.includes('ROLE_ADMIN') ? (
+        {papeis.includes('ROLE_ADMIN') ? (
+          <Grid item sm={2}>
             <Card
               sx={{ width: 220, height: 200 }}
               style={{ backgroundColor: '#f5f5f5' }}
@@ -42,15 +42,16 @@ const Menu = () => {
                 <AccountCircleIcon color="primary" sx={{ fontSize: 100 }} />
               </CardContent>
             </Card>
-          ) : (
-            ''
-          )}
-        </Grid>
-        <Grid item xs={12}>
-          {papeis.includes('ROLE_TRIADOR') ? (
+          </Grid>
+        ) : (
+          ''
+        )}
+        {papeis.includes('ROLE_TRIADOR') ? (
+          <Grid item sm={2}>
             <Card
               sx={{ width: 220, height: 200 }}
               style={{ backgroundColor: '#f5f5f5' }}
+              onClick={() => navigate('/processo')}
             >
               <CardContent sx={{ textAlign: 'center' }}>
                 <Typography variant="h6" color="text.secondary">
@@ -59,12 +60,12 @@ const Menu = () => {
                 <AutoAwesomeMotionIcon color="primary" sx={{ fontSize: 100 }} />
               </CardContent>
             </Card>
-          ) : (
-            ''
-          )}
-        </Grid>
-        <Grid item xs={12}>
-          {papeis.includes('ROLE_FINALIZADOR') ? (
+          </Grid>
+        ) : (
+          ''
+        )}
+        {papeis.includes('ROLE_FINALIZADOR') ? (
+          <Grid item sm={2}>
             <Card
               sx={{ width: 220, height: 200 }}
               style={{ backgroundColor: '#f5f5f5' }}
@@ -76,10 +77,10 @@ const Menu = () => {
                 <ArticleIcon color="primary" sx={{ fontSize: 100 }} />
               </CardContent>
             </Card>
-          ) : (
-            ''
-          )}
-        </Grid>
+          </Grid>
+        ) : (
+          ''
+        )}
       </Grid>
     </>
   );

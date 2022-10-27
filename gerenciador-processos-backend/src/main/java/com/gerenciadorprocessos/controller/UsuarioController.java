@@ -1,6 +1,7 @@
 package com.gerenciadorprocessos.controller;
 
 import com.gerenciadorprocessos.Exception.RegraNegocioException;
+import com.gerenciadorprocessos.config.JpaUserDetailService;
 import com.gerenciadorprocessos.dto.UsuarioDTO;
 import com.gerenciadorprocessos.dto.UsuarioRespostaDTO;
 import com.gerenciadorprocessos.service.UsuarioService;
@@ -8,6 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,9 +24,18 @@ import java.util.List;
 @RequestMapping(value = "/usuario")
 public class UsuarioController {
     UsuarioService usuarioService;
+    JpaUserDetailService detailsService;
     @Autowired
-    public UsuarioController(UsuarioService usuarioService ){
+    public UsuarioController(UsuarioService usuarioService, JpaUserDetailService detailsService ){
         this.usuarioService = usuarioService;
+        this.detailsService = detailsService;
+    }
+
+    @GetMapping("/verificar")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_TRIADOR','ROLE_FINALIZADOR')")
+    public ResponseEntity verificarUsuario(@RequestParam String login){
+        UsuarioRespostaDTO usuario = detailsService.findByUsername(login);
+        return ResponseEntity.ok(usuario);
     }
 
     @GetMapping("/listar")

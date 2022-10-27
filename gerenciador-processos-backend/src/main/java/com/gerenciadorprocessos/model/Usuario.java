@@ -32,10 +32,12 @@ public class Usuario {
     @Column(nullable = false, unique = true)
     private String login;
 
+    @Column(nullable = false)
     private String senha;
 
     private boolean usuarioAtivo;
 
+    @Column(nullable = false)
     private String papeis;
 
 

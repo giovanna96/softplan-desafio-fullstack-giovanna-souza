@@ -25,7 +25,7 @@ public class UsuarioDTO {
 
     boolean ativo;
 
-    List<String> papeis;
+    String papeis;
 
     public Usuario toUsuario(){
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
@@ -35,7 +35,7 @@ public class UsuarioDTO {
                 .login(this.getLogin())
                 .senha(encoder.encode(this.getSenha()))
                 .usuarioAtivo(this.isAtivo())
-                .papeis(String.join(",", this.getPapeis())).build();
+                .papeis(this.getPapeis()).build();
     }
 
 }

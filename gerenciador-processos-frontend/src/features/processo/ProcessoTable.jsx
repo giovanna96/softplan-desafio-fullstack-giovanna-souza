@@ -13,10 +13,31 @@ import {
 import Grid from '@mui/material/Unstable_Grid2';
 import { changeProcesso } from '../../redux/actions/proocesso.action';
 import FileOpenIcon from '@mui/icons-material/FileOpen';
+import PostAddIcon from '@mui/icons-material/PostAdd';
+import { change } from '../../redux/actions/parecer.action';
+import { useSelector } from 'react-redux';
 
 const ProcessoTable = (props) => {
   const { processo, dispatch, auth } = props;
+  const parecer = useSelector((state) => state.parecerReducer);
+  const handleAddParecer = (item) => {
+    dispatch(
+      change({
+        item: {
+          ...parecer.item,
+          idProcesso: item.id,
+        },
 
+        isCadastro: true,
+      }),
+    );
+    dispatch(
+      changeProcesso({
+        item: item,
+        page: 2,
+      }),
+    );
+  };
   return (
     <>
       <Grid
@@ -42,6 +63,7 @@ const ProcessoTable = (props) => {
                   <TableCell>n.º Processo</TableCell>
                   <TableCell>Descrição</TableCell>
                   <TableCell></TableCell>
+                  {processo.isParecer ? <TableCell></TableCell> : ''}
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -66,6 +88,15 @@ const ProcessoTable = (props) => {
                           <FileOpenIcon />
                         </IconButton>
                       </TableCell>
+                      {processo.isParecer ? (
+                        <TableCell>
+                          <IconButton onClick={() => handleAddParecer(item)}>
+                            <PostAddIcon />
+                          </IconButton>
+                        </TableCell>
+                      ) : (
+                        ''
+                      )}
                     </TableRow>
                   ))
                 ) : (
@@ -80,28 +111,32 @@ const ProcessoTable = (props) => {
           </TableContainer>
         </Grid>
       </Grid>
-      <Grid
-        container
-        justifyContent={'flex-end'}
-        style={{ paddingTop: '1%', paddingRight: '10%' }}
-      >
-        <Button
-          size="small"
-          variant="contained"
-          color="primary"
-          onClick={() =>
-            dispatch(
-              changeProcesso({
-                limparDados: true,
-                page: 2,
-                isVisualizar: false,
-              }),
-            )
-          }
+      {!processo.isParecer ? (
+        <Grid
+          container
+          justifyContent={'flex-end'}
+          style={{ paddingTop: '1%', paddingRight: '10%' }}
         >
-          Novo
-        </Button>
-      </Grid>
+          <Button
+            size="small"
+            variant="contained"
+            color="primary"
+            onClick={() =>
+              dispatch(
+                changeProcesso({
+                  limparDados: true,
+                  page: 2,
+                  isVisualizar: false,
+                }),
+              )
+            }
+          >
+            Novo
+          </Button>
+        </Grid>
+      ) : (
+        ''
+      )}
     </>
   );
 };

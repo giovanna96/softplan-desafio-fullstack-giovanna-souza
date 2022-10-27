@@ -1,6 +1,7 @@
 import { actionTypes } from '../actions/autenticacao.action';
 
 const initialState = {
+  id: '',
   login: '',
   senha: '',
   roles: '',

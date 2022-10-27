@@ -1,17 +1,17 @@
-import { actionTypes } from '../actions/proocesso.action';
+import { actionTypes } from '../actions/parecer.action';
 
 const initialState = {
   itens: [],
   item: {
-    numeroProcesso: '',
-    infoProcesso: '',
-    descProcesso: '',
+    idProcesso: '',
+    conteudoParecer: '',
+    parecerExecutado: false,
   },
   erro: '',
   msgErro: '',
   page: 1,
-  isVisualizar: false,
-  isParecer: false,
+  isCadastro: false,
+  limparDados: false,
 };
 
 export default (state = initialState, { type, payload }) => {

@@ -20,6 +20,16 @@ export const searchProcessos = (auth) => (dispatch) => {
   });
 };
 
+export const searchSemParecer = (auth) => (dispatch) => {
+  return Http.get('/processo/listar_sem_parecer', {
+    auth: { username: auth.login, password: auth.senha },
+  }).then((response) => {
+    if (typeof response !== 'undefined' && response.status === 200) {
+      dispatch(changeProcesso({ itens: response.data }));
+    }
+  });
+};
+
 export const addProcesso =
   ({ auth, processo }) =>
   (dispatch) => {

@@ -38,11 +38,12 @@ export const editUsuario =
   (dispatch) => {
     return Http.put('/usuario/atualizar?id=' + usuario.id, usuario, {
       auth: { username: auth.login, password: auth.senha },
-    }).then((response) => {
-      if (typeof response !== 'undefined' && response.status === 200) {
-        dispatch(change({ limparDados: true, page: 1 }));
-      }
-    });
+    }).then(
+      (response) =>
+        typeof response !== 'undefined' &&
+        response.status === 200 &&
+        dispatch(change({ limparDados: true, page: 1 })),
+    );
   };
 
 export const deleteUsuario =

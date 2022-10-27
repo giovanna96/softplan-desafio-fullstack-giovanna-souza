@@ -1,11 +1,18 @@
 import { useEffect } from 'react';
-import { searchProcessos } from '../../redux/actions/proocesso.action';
+import {
+  searchProcessos,
+  searchSemParecer,
+} from '../../redux/actions/proocesso.action';
 import ProcessoTable from './ProcessoTable';
 
 const ProcessoSearch = (props) => {
   const { processo, dispatch, auth } = props;
   useEffect(() => {
-    dispatch(searchProcessos(auth));
+    if (processo.isParecer) {
+      dispatch(searchSemParecer(auth));
+    } else {
+      dispatch(searchProcessos(auth));
+    }
   }, []);
   return (
     <>

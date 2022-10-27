@@ -142,7 +142,6 @@ const NewUsuario = (props) => {
             <FormControlLabel
               control={
                 <Checkbox
-                  name="checkedB"
                   color="primary"
                   checked={usuario.item.ativo}
                   value={usuario.item.ativo}

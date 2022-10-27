@@ -1,6 +1,7 @@
 import { Button, Divider, TextField, Typography } from '@mui/material';
 import Grid from '@mui/material/Unstable_Grid2';
 import React from 'react';
+import { change } from '../../redux/actions/parecer.action';
 import {
   addProcesso,
   changeProcesso,
@@ -13,7 +14,10 @@ const NewProcesso = (props) => {
       dispatch(addProcesso({ auth, processo: processo.item }));
     }
   };
-
+  const handleVoltar = () => {
+    dispatch(changeProcesso({ page: 1 }));
+    dispatch(change({ isCadastro: false }));
+  };
   return (
     <>
       <form onSubmit={() => handleSubmit()}>
@@ -127,7 +131,7 @@ const NewProcesso = (props) => {
               variant="contained"
               size="large"
               type="button"
-              onClick={() => dispatch(changeProcesso({ page: 1 }))}
+              onClick={() => handleVoltar()}
             >
               Voltar
             </Button>

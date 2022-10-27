@@ -31,11 +31,11 @@ const NewUsuario = (props) => {
         <Grid
           container
           alignItems="center"
-          style={{ paddingTop: '5%', paddingLeft: '1%', minWidth: 300 }}
+          style={{ paddingTop: '1%', paddingLeft: '1%', minWidth: 300 }}
           direction="row"
           rowSpacing={0.1}
         >
-          <Grid xs={12}>
+          <Grid item xs={12}>
             <Typography variant="h4" gutterBottom>
               Cadastro de Usuário
             </Typography>
@@ -49,7 +49,7 @@ const NewUsuario = (props) => {
           direction="row"
           rowSpacing={0.1}
         >
-          <Grid xs={12}>
+          <Grid item xs={12}>
             <TextField
               variant="standard"
               id="codUsr"
@@ -58,7 +58,7 @@ const NewUsuario = (props) => {
               disabled
             />
           </Grid>
-          <Grid xs={12}>
+          <Grid item xs={12}>
             <TextField
               variant="standard"
               id="nmUsr"
@@ -75,7 +75,7 @@ const NewUsuario = (props) => {
               required
             />
           </Grid>
-          <Grid xs={12}>
+          <Grid item xs={12}>
             <TextField
               variant="standard"
               id="emailUsr"
@@ -93,7 +93,7 @@ const NewUsuario = (props) => {
             />
           </Grid>
 
-          <Grid xs={3}>
+          <Grid item xs={3}>
             <TextField
               variant="standard"
               id="loginUsr"
@@ -109,7 +109,7 @@ const NewUsuario = (props) => {
               required
             />
           </Grid>
-          <Grid xs={3}>
+          <Grid item xs={3}>
             <InputPass
               valor={usuario.item.senha}
               handleChange={(input) =>
@@ -121,7 +121,7 @@ const NewUsuario = (props) => {
               }
             />
           </Grid>
-          <Grid xs={12}>
+          <Grid item xs={12}>
             <TextField
               variant="standard"
               id="papeisUsr"
@@ -138,7 +138,7 @@ const NewUsuario = (props) => {
               required
             />
           </Grid>
-          <Grid xs={12}>
+          <Grid item xs={12}>
             <FormControlLabel
               control={
                 <Checkbox

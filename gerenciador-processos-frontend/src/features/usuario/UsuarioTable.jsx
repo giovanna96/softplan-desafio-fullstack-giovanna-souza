@@ -27,15 +27,15 @@ const UsuarioTable = (props) => {
         direction="column"
         alignItems="center"
         justifyItems="center"
-        style={{ paddingTop: 100 }}
+        style={{ paddingTop: 10 }}
       >
-        <Grid xs={12}>
+        <Grid item xs={12}>
           <Typography variant="h4" gutterBottom>
             Consulta de Usuários
           </Typography>
           <Divider />
         </Grid>
-        <Grid xs={10}>
+        <Grid item xs={10}>
           <TableContainer>
             <Table size="small">
               <TableHead>
@@ -51,12 +51,12 @@ const UsuarioTable = (props) => {
               <TableBody>
                 {usuario.itens.length > 0 ? (
                   usuario.itens?.map((item, index) => (
-                    <TableRow>
-                      <TableCell key={index}>{item.id}</TableCell>
-                      <TableCell key={index}>{item.nome}</TableCell>
-                      <TableCell key={index}>{item.email}</TableCell>
-                      <TableCell key={index}>{item.papeis}</TableCell>
-                      <TableCell key={index}>
+                    <TableRow key={index}>
+                      <TableCell>{item.id}</TableCell>
+                      <TableCell>{item.nome}</TableCell>
+                      <TableCell>{item.email}</TableCell>
+                      <TableCell>{item.papeis}</TableCell>
+                      <TableCell>
                         <Checkbox
                           name="checkedB"
                           color="primary"
@@ -64,7 +64,7 @@ const UsuarioTable = (props) => {
                           disabled
                         />
                       </TableCell>
-                      <TableCell key={index}>
+                      <TableCell>
                         <IconButton
                           onClick={() =>
                             dispatch(

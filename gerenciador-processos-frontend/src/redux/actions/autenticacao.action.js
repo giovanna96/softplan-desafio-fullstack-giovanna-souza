@@ -19,6 +19,7 @@ export const logar = (dadosUsuario) => (dispatch) => {
             login: dadosUsuario.login,
             senha: dadosUsuario.senha,
             roles: response.data.papeis,
+            page: 2,
           }),
         ),
     )

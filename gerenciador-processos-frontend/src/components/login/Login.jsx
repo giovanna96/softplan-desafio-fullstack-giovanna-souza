@@ -8,11 +8,13 @@ import {
 } from '@mui/material';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { logar } from '../../redux/actions/autenticacao.action';
 import InputPass from '../ui/Layout/InputPass';
 
 const Login = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [dadosUsuario, setDadosUsuario] = React.useState({
     login: '',
     senha: '',
@@ -23,6 +25,9 @@ const Login = () => {
       ...dadosUsuario,
       senha: event.target.value,
     });
+  };
+  const logarUsuario = () => {
+    dispatch(logar(dadosUsuario)).then(navigate('/menu'));
   };
 
   return (
@@ -71,13 +76,15 @@ const Login = () => {
                 <Button
                   variant="contained"
                   size="large"
-                  onClick={() => dispatch(logar(dadosUsuario))}
+                  onClick={() => logarUsuario()}
                 >
                   Entrar
                 </Button>
               </CardActions>
             </Grid>
-            <Grid xs={12}>{JSON.stringify(auth)}</Grid>
+            <Grid item xs={12}>
+              {JSON.stringify(auth)}
+            </Grid>
           </Card>
         </Grid>
       </Grid>

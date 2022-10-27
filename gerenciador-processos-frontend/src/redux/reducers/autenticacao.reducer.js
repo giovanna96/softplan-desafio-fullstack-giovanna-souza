@@ -4,6 +4,7 @@ const initialState = {
   login: '',
   senha: '',
   roles: '',
+  page: 1,
 };
 
 export default (state = initialState, { type, payload }) => {

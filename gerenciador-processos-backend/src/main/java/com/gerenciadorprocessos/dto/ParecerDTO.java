@@ -25,6 +25,8 @@ public class ParecerDTO {
 
     private List<Long> responsavelParecer;
 
+    private Long idResponsavel;
+
     public Parecer toParecer(){
         return Parecer.builder()
                 .conteudoParecer(this.conteudoParecer)

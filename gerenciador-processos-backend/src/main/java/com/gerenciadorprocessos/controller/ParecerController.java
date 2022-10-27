@@ -8,10 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author Giovanna Severo
@@ -39,12 +36,12 @@ public class ParecerController {
         }
     }
 
-    @PostMapping("/salvar")
+    @PutMapping("/salvar")
     @PreAuthorize("hasRole('ROLE_FINALIZADOR')")
     public ResponseEntity salvar(@RequestBody ParecerDTO parecerDTO){
         try {
             parecerService.atribuirParecer(parecerDTO);
-            return ResponseEntity.status(HttpStatus.CREATED).build();
+            return ResponseEntity.status(HttpStatus.ACCEPTED).build();
         }catch (RegraNegocioException e){
             return ResponseEntity.badRequest().build();
         }

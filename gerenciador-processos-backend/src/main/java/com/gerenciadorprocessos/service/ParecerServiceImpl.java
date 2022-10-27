@@ -44,6 +44,7 @@ public class ParecerServiceImpl implements ParecerService{
     public void salvar(ParecerDTO dto) {
         Parecer parecer = dto.toParecer();
         parecer.setProcesso(processoRepository.findById(dto.getIdProcesso()).get());
+        parecer.setUsuarioResponsavel(usuarioRepository.findById(dto.getIdResponsavel()).get());
         parecerRepository.save(parecer);
     }
 

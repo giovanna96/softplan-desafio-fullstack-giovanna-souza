@@ -20,9 +20,12 @@ public class ProcessoDTO {
 
     private String infoProcesso;
 
+    private String descProcesso;
+
     public  Processo toProcesso(){
         return Processo.builder()
                 .infoProcesso(this.getInfoProcesso())
+                .descProcesso(this.getDescProcesso())
                 .numeroProcesso(this.getNumeroProcesso()).build();
     }
 

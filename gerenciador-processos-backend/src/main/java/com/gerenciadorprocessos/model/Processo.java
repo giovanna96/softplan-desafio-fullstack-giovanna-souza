@@ -27,6 +27,9 @@ public class Processo {
 
     private String numeroProcesso;
 
+    @Lob
     private String infoProcesso;
+
+    private String descProcesso;
 
 }

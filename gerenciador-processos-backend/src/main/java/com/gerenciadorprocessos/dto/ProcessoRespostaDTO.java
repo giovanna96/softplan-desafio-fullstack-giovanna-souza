@@ -22,11 +22,15 @@ public class ProcessoRespostaDTO {
 
     private String infoProcesso;
 
+    private String descProcesso;
+
+
     public static ProcessoRespostaDTO processoToDTO(Processo processo){
         return ProcessoRespostaDTO.builder()
                 .id(processo.getId())
                 .numeroProcesso(processo.getNumeroProcesso())
                 .infoProcesso(processo.getInfoProcesso())
+                .descProcesso(processo.getDescProcesso())
                 .build();
 
     }

@@ -3,8 +3,6 @@ import UsuarioSearch from './UsuarioSearch';
 import NewUsuario from './NewUsuario';
 import { useDispatch } from 'react-redux';
 import NavBar from '../../components/ui/Layout/NavBar';
-import { Box } from '@mui/material';
-import Grid from '@mui/material/Unstable_Grid2';
 
 const Usuario = () => {
   const usuario = useSelector((state) => state.usuarioReducer);

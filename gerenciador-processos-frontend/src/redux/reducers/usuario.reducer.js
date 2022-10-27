@@ -19,6 +19,7 @@ const initialState = {
   },
   msgErro: '',
   page: 1,
+  isEditar: false,
 };
 
 export default (state = initialState, { type, payload }) => {

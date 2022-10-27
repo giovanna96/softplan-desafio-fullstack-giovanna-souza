@@ -1,5 +1,4 @@
 import {
-  Box,
   Button,
   Checkbox,
   Divider,
@@ -10,24 +9,22 @@ import {
 import Grid from '@mui/material/Unstable_Grid2';
 import React from 'react';
 import InputPass from '../../components/ui/Layout/InputPass';
-import { addUsuario, change } from '../../redux/actions/usuarios.action';
-import { styled } from '@mui/material/styles';
-import Paper from '@mui/material/Paper';
-import { red } from '@mui/material/colors';
+import {
+  addUsuario,
+  change,
+  editUsuario,
+} from '../../redux/actions/usuarios.action';
 
 const NewUsuario = (props) => {
   const { usuario, dispatch, auth } = props;
   const handleSubmit = (event) => {
-    dispatch(addUsuario({ auth, usuario: usuario.item }));
+    if (!usuario.isEditar) {
+      dispatch(addUsuario({ auth, usuario: usuario.item }));
+    } else {
+      dispatch(editUsuario({ auth, usuario: usuario.item }));
+    }
   };
 
-  const Item = styled(Paper)(({ theme }) => ({
-    backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-    ...theme.typography.body2,
-    padding: theme.spacing(1),
-    textAlign: 'center',
-    color: theme.palette.text.secondary,
-  }));
   return (
     <>
       <form onSubmit={() => handleSubmit()}>
@@ -39,7 +36,7 @@ const NewUsuario = (props) => {
           rowSpacing={0.1}
         >
           <Grid xs={12}>
-            <Typography variant="h4" gutterBottom sx={{ bgcolor: red }}>
+            <Typography variant="h4" gutterBottom>
               Cadastro de Usuário
             </Typography>
             <Divider />

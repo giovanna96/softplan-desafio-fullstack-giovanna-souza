@@ -1,18 +1,23 @@
 import {
-  Box,
   Button,
   Checkbox,
+  Divider,
+  IconButton,
   Table,
   TableBody,
   TableCell,
   TableContainer,
   TableHead,
   TableRow,
+  Typography,
 } from '@mui/material';
 import Grid from '@mui/material/Unstable_Grid2';
-import { change } from '../../redux/actions/usuarios.action';
+import { change, deleteUsuario } from '../../redux/actions/usuarios.action';
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+
 const UsuarioTable = (props) => {
-  const { usuario, dispatch } = props;
+  const { usuario, dispatch, auth } = props;
 
   return (
     <>
@@ -24,6 +29,12 @@ const UsuarioTable = (props) => {
         justifyItems="center"
         style={{ paddingTop: 100 }}
       >
+        <Grid xs={12}>
+          <Typography variant="h4" gutterBottom>
+            Consulta de Usuários
+          </Typography>
+          <Divider />
+        </Grid>
         <Grid xs={10}>
           <TableContainer>
             <Table size="small">
@@ -53,7 +64,32 @@ const UsuarioTable = (props) => {
                           disabled
                         />
                       </TableCell>
-                      <TableCell></TableCell>
+                      <TableCell key={index}>
+                        <IconButton
+                          onClick={() =>
+                            dispatch(
+                              change({ item: item, page: 2, isEditar: true }),
+                            )
+                          }
+                        >
+                          <EditIcon />
+                        </IconButton>
+                        <IconButton
+                          onClick={() => {
+                            if (
+                              window.confirm(
+                                'Deseja realmente excluir o intem?',
+                              )
+                            ) {
+                              dispatch(
+                                deleteUsuario({ auth: auth, id: item.id }),
+                              );
+                            }
+                          }}
+                        >
+                          <DeleteForeverIcon />
+                        </IconButton>
+                      </TableCell>
                     </TableRow>
                   ))
                 ) : (
@@ -77,7 +113,9 @@ const UsuarioTable = (props) => {
           size="small"
           variant="contained"
           color="primary"
-          onClick={() => dispatch(change({ page: 2 }))}
+          onClick={() =>
+            dispatch(change({ limparDados: true, page: 2, isEditar: false }))
+          }
         >
           Novo
         </Button>

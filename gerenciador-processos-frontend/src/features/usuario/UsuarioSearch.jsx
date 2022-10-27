@@ -1,5 +1,4 @@
 import { useEffect } from 'react';
-import { useSelector } from 'react-redux';
 import { searchUsuarios } from '../../redux/actions/usuarios.action';
 import UsuarioTable from './UsuarioTable';
 
@@ -10,7 +9,7 @@ const UsuarioSearch = (props) => {
   }, []);
   return (
     <>
-      <UsuarioTable usuario={usuario} dispatch={dispatch} />
+      <UsuarioTable usuario={usuario} dispatch={dispatch} auth={auth} />
     </>
   );
 };
